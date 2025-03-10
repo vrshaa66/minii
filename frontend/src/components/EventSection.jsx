@@ -10,7 +10,8 @@ const EventsSection = () => {
       <Link to="/events">
         <div className="bg-gray-100 p-6 rounded-lg shadow-md cursor-pointer hover:bg-gray-200">
           <h2 className="text-xl font-bold text-center text-black">Events</h2>
-          <p className="text-center text-gray-600">Click to view upcoming events</p>
+          <p className="text-center text-gray-600">View all events</p>
+          
         </div>
       </Link>
     </div>
