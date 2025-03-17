@@ -41,7 +41,9 @@ const SchemePage = () => {
           <Link 
             key={semester} 
             to={`/scheme/${year}/${semester}`} 
+            
             className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center hover:shadow-xl transition"
+            // onClick={() => navigate(`/scheme/${year}/semester/${semester}`)}
           >
             <div className="w-20 h-20 bg-blue-500 text-white flex items-center justify-center rounded-full text-2xl font-bold">
               📄

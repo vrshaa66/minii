@@ -92,7 +92,7 @@ function Navbar() {
           </div>
         </div>
 
-        <Link to="/exam-timetable" className="hover:underline">Exam Timetable</Link>
+        <Link to="/exam-timetable" className="hover:underline cursor-pointer">Exam Timetable</Link>
         <Link to="/upload-notes" className="hover:underline">Upload Notes</Link>
         <Link to="#" className="hover:underline">More</Link>
       </div>

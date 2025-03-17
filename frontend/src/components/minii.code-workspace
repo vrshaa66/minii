@@ -1,6 +1,13 @@
 {
 	"folders": [
 		{
+			"name": "shared-theme",
+			"path": "../../../../yt series/templates/shared-theme"
+		},
+		{
+			"path": "../../../../yt series/templates/sign-up"
+		},
+		{
 			"path": "../../.."
 		}
 	]
