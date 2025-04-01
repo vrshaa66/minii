@@ -4,7 +4,6 @@ const UploadEventPage = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: "",
     collegeName: "",
     idCard: null,
     eventName: "",
@@ -24,11 +23,27 @@ const UploadEventPage = () => {
     setFormData({ ...formData, [name]: files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
+    
+    const formDataObj = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataObj.append(key, value);
+    });
+  
+    try {
+      const response = await fetch("http://localhost:5000/upload-event", {
+        method: "POST",
+        body: formDataObj,
+      });
+  
+      const data = await response.json();
+      alert(data.message);
+    } catch (error) {
+      alert("Failed to submit event");
+    }
   };
-
+  
   return (
     <div className="container mx-auto p-6">
       <h2 className="text-center text-2xl font-bold mb-6">Upload Event</h2>
@@ -44,10 +59,7 @@ const UploadEventPage = () => {
           <label className="block text-gray-700">Email:</label>
           <input type="email" name="email" onChange={handleChange} className="w-full border p-2 rounded" required />
         </div>
-        <div className="mb-3">
-          <label className="block text-gray-700">Password:</label>
-          <input type="password" name="password" onChange={handleChange} className="w-full border p-2 rounded" required />
-        </div>
+        
         <div className="mb-3">
           <label className="block text-gray-700">College Name:</label>
           <input type="text" name="collegeName" onChange={handleChange} className="w-full border p-2 rounded" required />
