@@ -1,65 +1,10 @@
 
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import { useLocation } from "react-router-dom";
-// function Navbar() {
-
-//   return (
-//     <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
-//       <div className="text-xl font-bold cursor-pointer">
-//         <Link to="/">ACADEX</Link>
-//       </div>
-//       <div className="space-x-4 flex">
-//         <Link to="/" className="hover:underline">Home</Link>
-
-//         {/* Syllabus Dropdown */}
-//         <div className="relative group">
-//           <span className="hover:underline cursor-pointer">Syllabus</span>
-//           <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-//             <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
-//             <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
-//             <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
-//           </div>
-//         </div>
-
-//         {/* Notes Dropdown */}
-//         <div className="relative group">
-//           <span className="hover:underline cursor-pointer">Notes</span>
-//           <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-//             <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
-//             <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
-//             <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
-//           </div>
-//         </div>
-
-//         {/* Question Papers Dropdown */}
-//         <div className="relative group">
-//           <span className="hover:underline cursor-pointer">Question Papers</span>
-//           <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-//             <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
-//             <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
-//             <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
-//           </div>
-//         </div>
-
-//         <Link to="/exam-timetable" className="hover:underline cursor-pointer">Exam Timetable</Link>
-//         <Link to="/upload-notes" className="hover:underline">Upload Notes</Link>
-//         <Link to="#" className="hover:underline">More</Link>
-//       </div>
-//     </nav>
-//   );
-// }
-
-// export default Navbar;
 import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar({ user }) {
   console.log("Navbar User:", user); // Add this line
   const isAdmin = user && user.isAdmin;
-
-
-
   return (
     <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
       <div className="text-xl font-bold cursor-pointer">
@@ -67,29 +12,9 @@ function Navbar({ user }) {
       </div>
       <div className="space-x-4 flex items-center">
         <Link to="/" className="hover:underline">Home</Link>
-        {/* Syllabus Dropdown */}
         <div className="relative group">
-          <span className="hover:underline cursor-pointer">Syllabus</span>
+          <span className="hover:underline cursor-pointer">Study Materials</span>
           <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-            <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
-            <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
-            <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
-          </div>
-        </div>
-        {/* Notes Dropdown */}
-        <div className="relative group">
-          <span className="hover:underline cursor-pointer">Notes</span>
-          <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-            <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
-            <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
-            <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
-          </div>
-        </div>
-        {/* Question Papers Dropdown */}
-        <div className="relative group">
-          <span className="hover:underline cursor-pointer">Question Papers</span>
-          <div className="absolute hidden group-hover:block bg-white text-black shadow-md mt-1">
-            <Link to="/scheme/2015" className="block px-4 py-2 hover:bg-gray-200">2015</Link>
             <Link to="/scheme/2019" className="block px-4 py-2 hover:bg-gray-200">2019</Link>
             <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
           </div>

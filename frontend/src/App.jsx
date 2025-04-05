@@ -170,8 +170,58 @@
 // export default App;
 
 
+// import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+// import { useState } from "react";
+// import LoginPage from "./components/LoginPage";
+// import SignUpPage from "./components/SignUpPage";
+// import EventsPage from "./components/EventsPage";
+// import UploadEventPage from "./components/UploadEventPage";
+// import EventsSection from "./components/EventSection";
+// import Navbar from "./components/Navbar";
+// import SchemePage from "./components/SchemePage";
+// import BranchPage from "./components/BranchPage";
+// import AdminPanel from "./components/AdminPanel";
+
+// const App = () => {
+//     const [user, setUser] = useState(null);
+//     console.log("App User:", user); // Add this line
+
+//     const isAdmin = user && user.isAdmin;
+
+//     return (
+//         <Router>
+//             <Routes>
+//                 <Route path="/login" element={<LoginPage setUser={setUser} />} />
+//                 <Route path="/signup" element={<SignUpPage />} />
+//                 <Route path="/" element={<LoginPage setUser={setUser} />} />
+
+//                 {user ? (
+//                     <>
+//                         {/* Wrap EventsPage with Navbar */}
+//                         <Route path="/events" element={
+//                             <div>
+//                                 <Navbar user={user} />
+//                                 <EventsPage />
+//                             </div>
+//                         } />
+//                         <Route path="/upload-event" element={<UploadEventPage />} />
+//                         <Route path="/scheme/:year" element={<SchemePage />} />
+//                         <Route path="/scheme/:year/:semester" element={<BranchPage />} />
+//                         {isAdmin && <Route path="/admin" element={<AdminPanel />} />}
+//                         {!isAdmin && <Route path="/admin" element={<Navigate to="/login" replace />} />}
+//                     </>
+//                 ) : (
+//                     <Route path="*" element={<Navigate to="/login" replace />} />
+//                 )}
+//             </Routes>
+//         </Router>
+//     );
+// };
+
+// export default App;
+
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Import useEffect
 import LoginPage from "./components/LoginPage";
 import SignUpPage from "./components/SignUpPage";
 import EventsPage from "./components/EventsPage";
@@ -181,12 +231,51 @@ import Navbar from "./components/Navbar";
 import SchemePage from "./components/SchemePage";
 import BranchPage from "./components/BranchPage";
 import AdminPanel from "./components/AdminPanel";
+import VerifyEmailPage from "./components/VerifyEmailPage";
+import EventDetailsPage from "./components/EventDetailsPage";
+import SubjectPage from "./components/SubjectPage";
+import ModulePage from "./components/ModulePage"; // Import the new component
 
 const App = () => {
     const [user, setUser] = useState(null);
-    console.log("App User:", user); // Add this line
+    console.log("App User:", user);
 
     const isAdmin = user && user.isAdmin;
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            // Verify the token with the backend
+            fetch("http://localhost:5000/verify-token", { // Create a new route in server.js to verify token
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        // Token is invalid, remove it from localStorage
+                        localStorage.removeItem("token");
+                        setUser(null);
+                        return null;
+                    }
+                })
+                .then((data) => {
+                    if (data) {
+                        setUser({
+                            email: data.email,
+                            isAdmin: data.isAdmin,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Token verification error:", error);
+                    localStorage.removeItem("token");
+                    setUser(null);
+                });
+        }
+    }, []);
 
     return (
         <Router>
@@ -194,21 +283,27 @@ const App = () => {
                 <Route path="/login" element={<LoginPage setUser={setUser} />} />
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/" element={<LoginPage setUser={setUser} />} />
-
+                <Route path="/verify/:token" element={<VerifyEmailPage />} />
                 {user ? (
                     <>
                         {/* Wrap EventsPage with Navbar */}
-                        <Route path="/events" element={
-                            <div>
-                                <Navbar user={user} />
-                                <EventsPage />
-                            </div>
-                        } />
+                        <Route
+                            path="/events"
+                            element={
+                                <div>
+                                    <Navbar user={user} />
+                                    <EventsPage />
+                                </div>
+                            }
+                        />
                         <Route path="/upload-event" element={<UploadEventPage />} />
                         <Route path="/scheme/:year" element={<SchemePage />} />
                         <Route path="/scheme/:year/:semester" element={<BranchPage />} />
+                        <Route path="/scheme/:year/:semester/:branch" element={<SubjectPage />} /> 
+                        <Route path="/scheme/:year/:semester/:branch/:subjectCode" element={<ModulePage />} />
                         {isAdmin && <Route path="/admin" element={<AdminPanel />} />}
                         {!isAdmin && <Route path="/admin" element={<Navigate to="/login" replace />} />}
+                        <Route path="/event/:id" element={<EventDetailsPage />} /> {/* New route for event details */}
                     </>
                 ) : (
                     <Route path="*" element={<Navigate to="/login" replace />} />

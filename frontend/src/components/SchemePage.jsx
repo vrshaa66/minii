@@ -33,7 +33,7 @@ const SchemePage = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">KTU Syllabus | {year} Scheme</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-4">KTU | {year} Scheme</h1>
       <p className="text-blue-600 mb-6">Select Your Semester</p>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
