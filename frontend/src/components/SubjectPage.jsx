@@ -17,6 +17,7 @@ const SubjectPage = () => {
                 { name: "Disaster Management", code: "MOT301" },
             ];
         }
+        
         return [];
     };
 

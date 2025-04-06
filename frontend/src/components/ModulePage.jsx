@@ -90,5 +90,3 @@ const ModulePage = () => {
 };
 
 export default ModulePage;
-
-

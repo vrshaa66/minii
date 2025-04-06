@@ -1,10 +1,17 @@
 
+
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar({ user }) {
   console.log("Navbar User:", user); // Add this line
   const isAdmin = user && user.isAdmin;
+  const navigate = useNavigate();
+
+  const handleUploadNotesClick = () => {
+    navigate("/upload-notes");
+  };
+
   return (
     <nav className="w-full bg-blue-600 p-4 text-white flex justify-between items-center">
       <div className="text-xl font-bold cursor-pointer">
@@ -19,14 +26,14 @@ function Navbar({ user }) {
             <Link to="/scheme/2024" className="block px-4 py-2 hover:bg-gray-200">2024</Link>
           </div>
         </div>
-        <Link to="/exam-timetable" className="hover:underline cursor-pointer">Exam Timetable</Link>
-        <Link to="/upload-notes" className="hover:underline">Upload Notes</Link>
-        <Link to="#" className="hover:underline">More</Link>
+       
+        <span onClick={handleUploadNotesClick} className="hover:underline cursor-pointer">Upload Notes</span>
+        <Link to="/more" className="hover:underline">More</Link> {/* Changed Link to /more */}
+        
 
         {/* Admin Panel Link (conditionally rendered) */}
         {isAdmin && (
           <Link to="/admin" className="hover:underline">Admin Panel</Link>
-      
         )}
       </div>
     </nav>
